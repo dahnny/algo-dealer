@@ -49,7 +49,7 @@ const App = function AppWrapper() {
   const buyCar = (car) => {
     buyCarAction(address, car)
       .then(() => {
-        getCars();
+        getCars(address);
         fetchBalance(address);
       })
       .catch(error => {
@@ -61,7 +61,7 @@ const App = function AppWrapper() {
   const sellCar = (car) => {
     sellCarAction(address, car)
       .then(() => {
-        getCars();
+        getCars(address);
         fetchBalance(address);
       })
       .catch(error => {
@@ -74,7 +74,7 @@ const App = function AppWrapper() {
     console.log(data);
     createCarAction(address, data)
       .then(() => {
-        getCars();
+        getCars(address);
         fetchBalance(address);
       })
       .catch(error => {
