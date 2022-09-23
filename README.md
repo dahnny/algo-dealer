@@ -1,5 +1,7 @@
  AlgoDealer is a decentralized platform for buying cars using the algo blockchain. With this app, users are able to create a car alias and sell it without any middleman. Users also have the added feature of purchasing cars directly from the app and it will be automatically added to their collection. 
 
+ https://deluxe-dusk-1dd197.netlify.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
