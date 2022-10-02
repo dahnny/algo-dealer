@@ -3,6 +3,7 @@ import SalesCarItem from './SalesCarItem';
 
 
 const SalesCars = props => {
+    const {cars, loadingCars} = props
 
     return (
         <Fragment>
@@ -16,11 +17,19 @@ const SalesCars = props => {
                             </div>
                         </div>
                     </div>
-                    <div className="row">
+                    {
+                        loadingCars ?
 
-                        {props.cars.map(car => (car.isSale !== 0) && <SalesCarItem key={car.appId} car={car} buyCar={props.buyCar} />)}
+                            <div><h1>Loading...</h1></div>
+                            :
+                            <div className="row">
 
-                    </div>
+                                {cars.map(car => (car.isSale !== 0) &&
+                                    <SalesCarItem key={car.appId} car={car} buyCar={props.buyCar}/>)}
+
+                            </div>
+                    }
+
                 </div>
             </section>
 
