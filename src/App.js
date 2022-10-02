@@ -18,6 +18,8 @@ const App = function AppWrapper() {
   const [balance, setBalance] = useState(0);
   const [cars, setCars] = useState([])
   const [myCars, setMyCars] = useState([])
+  const [loading, setLoading] = useState(false)
+
 
   const fetchBalance = async (accountAddress) => {
     indexerClient.lookupAccountByID(accountAddress).do()
@@ -84,15 +86,16 @@ const App = function AppWrapper() {
 
   const getCars = async (_address) => {
     try {
+        setLoading(true)
       const cars = await getCarsAction();
       setCars(cars);
       const myCars = cars.filter(car => car.owner === _address && (car.isSale === 0))
-      console.log(myCars);
       setMyCars(myCars);
     } catch (error) {
       console.log(error);
+    }finally {
+        setLoading(false)
     }
-
   };
 
   return (
@@ -100,7 +103,7 @@ const App = function AppWrapper() {
       {address ? <div className="content">
         <Header balance={balance} />
         <Banner />
-        <SalesCars cars={cars} buyCar={buyCar} />
+        <SalesCars cars={cars} loadingCars={loading} buyCar={buyCar} />
         <AddCar addToCars={addtoCars} />
         <MyCar cars={myCars} sellCar={sellCar} />
         <Footer />
