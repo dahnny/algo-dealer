@@ -1,0 +1,1 @@
+{ name: " Aston Martin", image: "https://i.postimg.cc/tCMzpJP1/best-classic-cars-vintage-Aston-Martin-DB5-1964-old-luxe-digital-2x.jpg", model: "DB5", mileage: "20000", transmission: "Automatic", isUsed: 1, additionalInfo: "Used by my grandfather for 10 years, neat condition.", price: 3000000 }
