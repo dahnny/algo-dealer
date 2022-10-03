@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { toast } from "react-toastify";
 import {
   buyCarAction,
   createCarAction,
@@ -15,7 +16,12 @@ import MyCar from "./components/MyCar";
 import Loader from "./components/Loader";
 import { indexerClient, myAlgoConnect } from "./utils/constants";
 import Cover from "./components/Cover";
-
+import {
+  Notification,
+  NotificationError,
+  NotificationSuccess,
+  NotificationInfo,
+} from "./components/Notification";
 const App = function AppWrapper() {
   const [address, setAddress] = useState(null);
   const [name, setName] = useState(null);
@@ -60,39 +66,49 @@ const App = function AppWrapper() {
   };
 
   const buyCar = (car) => {
+    toast(<NotificationInfo text="Making Car purchase" />);
     setLoading(true);
     buyCarAction(address, car)
       .then(() => {
+        toast(<NotificationSuccess text="Car purchased." />);
         getCars(address);
         fetchBalance(address);
       })
       .catch((error) => {
+        toast(<NotificationError text="Failed to purchase car." />);
         setLoading(false);
         console.log(error);
       });
   };
 
   const sellCar = (car, newPrice) => {
+    toast(<NotificationInfo text="Adding Car to market" />);
     setLoading(true);
     sellCarAction(address, car, newPrice)
       .then(() => {
+        toast(<NotificationSuccess text="Car listed successfully." />);
         getCars(address);
         fetchBalance(address);
       })
       .catch((error) => {
+        toast(<NotificationError text="Failed to list car." />);
         setLoading(false);
         console.log(error);
       });
   };
 
   const addtoCars = async (data) => {
+    toast(<NotificationInfo text="Adding Car Data" />);
     setLoading(true);
     createCarAction(address, data)
       .then(() => {
+        toast(<NotificationSuccess text="Car added successfully." />);
+        getCars(address);
         getCars(address);
         fetchBalance(address);
       })
       .catch((error) => {
+        toast(<NotificationError text="Failed to add car." />);
         setLoading(false);
         console.log(error);
       });
@@ -100,6 +116,7 @@ const App = function AppWrapper() {
 
   const getCars = async (_address) => {
     setLoading(true);
+    toast(<NotificationInfo text="Getting Cars" />);
     try {
       const cars = await getCarsAction();
       setCars(cars);
@@ -120,6 +137,7 @@ const App = function AppWrapper() {
 
   return (
     <>
+      <Notification />
       {address ? (
         <div className="content">
           <Header
